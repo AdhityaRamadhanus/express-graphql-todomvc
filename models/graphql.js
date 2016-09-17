@@ -37,25 +37,23 @@ var MutationAdd = {
   resolve: mongoResolver.addTodo
 }
 
-// var MutationDelete = {
-//   type: new graphql.GraphQLList(TodoType),
-//   description: 'Delete a todo',
-//   args: {
-//     id: {
-//       name: 'Todo id',
-//       type: graphql.GraphQLID
-//     }
-//   },
-//   resolve: (root, args) => {
-//     TODOs = TODOs.filter((todo) => todo.id !== args.id)
-//     return TODOs
-//   }
-// }
+var MutationDelete = {
+  type: TodoType,
+  description: 'Delete a todo',
+  args: {
+    id: {
+      name: 'Todo id',
+      type: graphql.GraphQLID
+    }
+  },
+  resolve: mongoResolver.deleteTodo
+}
 
 var MutationType = new graphql.GraphQLObjectType({  
   name: 'Mutation',
   fields: {
-    add: MutationAdd
+    add: MutationAdd,
+    delete: MutationDelete
   }
 })
 

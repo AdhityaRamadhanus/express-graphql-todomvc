@@ -21,3 +21,13 @@ module.exports.addTodo = (roots, args, req) => {
     })
   })
 }
+
+module.exports.deleteTodo = (roots, args, req) => {
+  return new Promise((resolve, reject) => {
+   Todo.findByIdAndRemove(args.id, (err, removedTodo) => {
+    if (err) reject(err)
+    else if (!removedTodo) reject(new Error('Todos Not Found!'))
+    else resolve(removedTodo)
+   }) 
+  })
+}
