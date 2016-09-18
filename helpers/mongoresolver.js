@@ -53,9 +53,13 @@ module.exports.deleteTodo = (roots, args, req) => {
 
 module.exports.toggleOne = (roots, args, req) => {
   return new Promise((resolve, reject) => {
-    Todo.findByIdAndUpdate(args.id, {completed: true}, {new: true}, (err, updatedTodo) => {
+    Todo.findById(args.id, (err, todo) => {
       if (err) reject(err)
-      else resolve(updatedTodo)
+      todo.completed = !todo.completed
+      todo.save((err, savedTodo) => {
+        if (err) reject(err)
+        else resolve(savedTodo)
+      })
     })
   })
 }
