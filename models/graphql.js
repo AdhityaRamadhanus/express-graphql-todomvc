@@ -1,5 +1,8 @@
+
 const graphql = require ('graphql')
 const mongoResolver = require('../helpers/mongoresolver')
+
+
 var TodoType = new graphql.GraphQLObjectType({  
   name: 'todo',
   fields: {
@@ -21,6 +24,16 @@ var queryType = new graphql.GraphQLObjectType({
     todos: {
       type: new graphql.GraphQLList(TodoType),
       resolve: mongoResolver.getAll
+    },
+    todosId: {
+      type: TodoType,
+      args: {
+        id: {
+          name: 'Todo Id',
+          type: graphql.GraphQLID
+        }
+      },
+      resolve: mongoResolver.getOne
     }
   }
 })

@@ -2,6 +2,15 @@ const mongoose = require('mongoose')
 const Todo = mongoose.model('Todo')
 const async = require('async')
 
+module.exports.getOne = (roots, args, req) => {
+  return new Promise((resolve, reject) => {
+    Todo.findById(args.id, (err, todo) => {
+      if (err) reject(err)
+      else resolve(todo)
+    })
+  })
+}
+
 module.exports.getAll = (roots, args, req) => {
 	return new Promise((resolve, reject) => {
     Todo.find({}, (err, todos) => {
