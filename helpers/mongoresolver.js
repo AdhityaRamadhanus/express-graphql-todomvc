@@ -32,6 +32,15 @@ module.exports.addTodo = (roots, args, req) => {
   })
 }
 
+module.exports.deleteAllTodo = (roots, args, req) => {
+  return new Promise((resolve, reject) => {
+   Todo.remove({}, (err) => {
+    if (err) reject(err)
+    else resolve('All Todos Deleted')
+   }) 
+  })
+}
+
 module.exports.deleteTodo = (roots, args, req) => {
   return new Promise((resolve, reject) => {
    Todo.findByIdAndRemove(args.id, (err, removedTodo) => {

@@ -62,6 +62,12 @@ var MutationDelete = {
   resolve: mongoResolver.deleteTodo
 }
 
+var MutationDeleteAll = {
+  type: graphql.GraphQLString,
+  description: 'Delete all todo',
+  resolve: mongoResolver.deleteAllTodo
+}
+
 var MutationToggleOne = {
   type: TodoType,
   description: 'Toggle one todos to completed',
@@ -101,6 +107,7 @@ var MutationType = new graphql.GraphQLObjectType({
   fields: {
     add: MutationAdd,
     delete: MutationDelete,
+    deleteAll: MutationDeleteAll,
     toggleOne: MutationToggleOne,
     toggleAll: MutationToggleAll,
     update: MutationUpdate
