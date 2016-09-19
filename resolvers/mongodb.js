@@ -32,6 +32,27 @@ module.exports.addTodo = (roots, args, req) => {
   })
 }
 
+module.exports.deleteAllCompletedTodo = (roots, args, req) => {
+  return new Promise((resolve, reject) => {
+    async.waterfall([
+      (cb) => {
+        Todo.remove({completed: true}, (err) => {
+          cb(err)
+        })
+      },
+      (cb) => {
+        Todo.find({}, (err, todos) => {
+          cb(err, todos)
+        })
+      }
+    ], (err, todos) => {
+        if (err) reject(err)
+        else resolve(todos)
+      }
+    )
+  })
+}
+
 module.exports.deleteAllTodo = (roots, args, req) => {
   return new Promise((resolve, reject) => {
    Todo.remove({}, (err) => {

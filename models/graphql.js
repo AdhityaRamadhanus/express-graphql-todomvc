@@ -1,6 +1,6 @@
 
 const graphql = require ('graphql')
-const mongoResolver = require('../helpers/mongoresolver')
+const mongoResolver = require('../resolvers/mongodb')
 
 
 var TodoType = new graphql.GraphQLObjectType({  
@@ -68,6 +68,12 @@ var MutationDeleteAll = {
   resolve: mongoResolver.deleteAllTodo
 }
 
+var MutationDeleteCompleted = {
+  type: new graphql.GraphQLList(TodoType),
+  description: 'Delete all completed todo',
+  resolve: mongoResolver.deleteAllCompletedTodo
+}
+
 var MutationToggleOne = {
   type: TodoType,
   description: 'Toggle one todos to completed',
@@ -108,6 +114,7 @@ var MutationType = new graphql.GraphQLObjectType({
     add: MutationAdd,
     delete: MutationDelete,
     deleteAll: MutationDeleteAll,
+    deleteCompleted: MutationDeleteCompleted,
     toggleOne: MutationToggleOne,
     toggleAll: MutationToggleAll,
     update: MutationUpdate
