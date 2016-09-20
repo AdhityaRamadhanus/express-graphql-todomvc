@@ -23,7 +23,7 @@ Featured Database
 
 * MongoDB
 * Apache Cassandra (soon)
-* MySQL (soon)
+* MySQL (in development)
 
 Licenses
 --------
