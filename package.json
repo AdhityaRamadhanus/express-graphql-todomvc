@@ -18,6 +18,8 @@
     "express-graphql": "^0.5.4",
     "graphql": "^0.7.0",
     "mongoose": "^4.6.0",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "mysql": "^2.11.1",
+    "sequelize": "^3.24.3"
   }
 }

@@ -15,5 +15,5 @@ module.exports = (dbURI, mongoose) => {
       process.exit(0)
     })
   })
-  require('../models/todo')
+  require('../models/mongodb/todo')
 }

@@ -1,8 +1,8 @@
 
 const graphql = require ('graphql')
 const mongoResolver = require('../resolvers/mongodb')
-
-
+const mysqlResolver = require('../resolvers/mysql')
+const resolver = mongoResolver
 var TodoType = new graphql.GraphQLObjectType({  
   name: 'todo',
   fields: {
@@ -23,7 +23,7 @@ var queryType = new graphql.GraphQLObjectType({
   fields: {
     todos: {
       type: new graphql.GraphQLList(TodoType),
-      resolve: mongoResolver.getAll
+      resolve: resolver.getAll
     },
     todosId: {
       type: TodoType,
@@ -33,7 +33,7 @@ var queryType = new graphql.GraphQLObjectType({
           type: graphql.GraphQLID
         }
       },
-      resolve: mongoResolver.getOne
+      resolve: resolver.getOne
     }
   }
 })
@@ -47,7 +47,7 @@ var MutationAdd = {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     }
   },
-  resolve: mongoResolver.addTodo
+  resolve: resolver.addTodo
 }
 
 var MutationDelete = {
@@ -59,19 +59,19 @@ var MutationDelete = {
       type: graphql.GraphQLID
     }
   },
-  resolve: mongoResolver.deleteTodo
+  resolve: resolver.deleteTodo
 }
 
 var MutationDeleteAll = {
   type: graphql.GraphQLString,
   description: 'Delete all todo',
-  resolve: mongoResolver.deleteAllTodo
+  resolve: resolver.deleteAllTodo
 }
 
 var MutationDeleteCompleted = {
   type: new graphql.GraphQLList(TodoType),
   description: 'Delete all completed todo',
-  resolve: mongoResolver.deleteAllCompletedTodo
+  resolve: resolver.deleteAllCompletedTodo
 }
 
 var MutationToggleOne = {
@@ -83,13 +83,13 @@ var MutationToggleOne = {
       type: graphql.GraphQLID
     }
   },
-  resolve: mongoResolver.toggleOne
+  resolve: resolver.toggleOne
 }
 
 var MutationToggleAll = {
   type: new graphql.GraphQLList(TodoType),
   description: 'Toggle all todos to completed',
-  resolve: mongoResolver.toggleAll
+  resolve: resolver.toggleAll
 }
 
 var MutationUpdate = {
@@ -105,7 +105,7 @@ var MutationUpdate = {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     }
   },
-  resolve: mongoResolver.saveTodo
+  resolve: resolver.saveTodo
 }
 
 var MutationType = new graphql.GraphQLObjectType({  

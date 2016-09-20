@@ -5,7 +5,7 @@
   <a href="#licenses">License</a>
   <br><br>
   <blockquote>
-  	Graphql server for simple todo app (https://github.com/AdhityaRamadhanus/todomvc-react-graphql) 
+  	Graphql server for simple todo app (https://github.com/AdhityaRamadhanus/todomvc-react-graphql)
   	Built on top of expressjs backed by various database including nosql and sql
   </blockquote>
 </p>
