@@ -8,6 +8,9 @@
   	Graphql server for simple todo app (https://github.com/AdhityaRamadhanus/todomvc-react-graphql)
   	Built on top of expressjs backed by various database including nosql and sql
   </blockquote>
+  <blockquote>
+  	Since graphql is agnostic to the database used in the API, we can just provide any 'resolver' for each type of database to the graphql schema. This simple app is an example of mongodb, mysql, and apache cassandra resolver for graphql 
+  </blockquote>
 </p>
 
 Installation
@@ -17,13 +20,22 @@ Installation
 * cd express-graphql-something
 * npm install
 * npm start
+* define your .env files
+* example of .env
+```
+NODE_ENV=development
+
+MONGODB_URI='mongodb://username:password@localhost:27017/dbname'
+MYSQL_URI='mysql://username:password@localhost:3306/dbname'
+```
+
 
 Featured Database
 -----------------
 
 * MongoDB
 * Apache Cassandra (soon)
-* MySQL (in development)
+* MySQL
 
 Licenses
 --------
