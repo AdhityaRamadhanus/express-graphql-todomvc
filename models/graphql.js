@@ -2,7 +2,7 @@
 const graphql = require ('graphql')
 const mongoResolver = require('../resolvers/mongodb')
 const mysqlResolver = require('../resolvers/mysql')
-const resolver = mongoResolver
+const resolver = mysqlResolver
 var TodoType = new graphql.GraphQLObjectType({  
   name: 'todo',
   fields: {
