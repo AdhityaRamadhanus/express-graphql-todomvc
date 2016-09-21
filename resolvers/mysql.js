@@ -1,4 +1,5 @@
 'use strict'
+const async = require('async')
 
 module.exports.getOne = (roots, args, req) => {
   return new Promise((resolve, reject) => {
@@ -119,6 +120,40 @@ module.exports.toggleOne = (roots, args, req) => {
       .catch((err) => {
         reject(err)
       })
+  })
+}
+
+module.exports.toggleAll = (roots, args, req) => {
+  return new Promise((resolve, reject) => {
+    async.waterfall([
+      (cb) => {
+        mysql.models.Todo
+          .update({completed: true}, {where: {}})
+          .then(() => {
+            cb()
+          })
+          .catch((err) => {
+            cb(err)
+          })
+      },
+      (cb) => {
+        mysql.models.Todo
+          .findAll({attributes: ['id', 'title', 'completed']})
+          .then((todos) => {
+            var plainTodos = todos.map((todo) => {
+              return todo.get({plain: true})
+            })
+            resolve(plainTodos)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      }
+    ], (err, todos) => {
+        if (err) reject(err)
+        else resolve(todos)
+      }
+    )
   })
 }
 
